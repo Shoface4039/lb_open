@@ -1,0 +1,14 @@
+# テストで使うものや、意図せず作成されるもの
+ipynb
+.ipynb_checkpoints/
+__pycache__/
+
+
+# 個別のコンペに関する情報はいれない
+competitions/*
+# ただしチュートリアルは含める
+!competitions/tutorial_houseprice/
+
+
+!.gitkeep
+

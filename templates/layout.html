@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!-- -->
+<html>
+    <head>
+    <link rel="stylesheet" href="static/style.css?q55">
+    <title>Exercise Leaderboard beta</title>
+    </head>
+    <body>
+        <div class="header">
+            2019新卒研修
+        </div>
+
+        <div class="main" id="compe_info">
+            <h1>分析演習</h1>
+            <p id="compe_description">ニュース配信のクリック率予測</p>
+        </div>
+        <div class="main" id="compe_bar">
+            <!-- この辺りあとでスタイルまとめたい -->
+            <div style="text-align:left;float:left;padding-top:14px; padding-bottom:14px;">
+                <a href="overview" style="
+                        border-width:0;
+                        text-decoration:none;
+                        font-size:14pt;
+                        padding-bottom:14px;
+                        padding-top:14px;
+                        padding-left:18px;
+                        padding-right:18px;
+                        color:black;
+                        background-color:#fefeff;
+                        "    
+                    onmouseover="
+                        this.style.background='linear-gradient(transparent 98%, #88af88 2%)'
+                        this.style.color='#88af88'
+                        "
+                     onmouseout="
+                        this.style.background='#fefeff'
+                        this.style.color='black'
+                        " 
+                    >Overview</a>
+            </div >
+            <div style="text-align:left;float:left;padding-top:14px; padding-bottom:14px;">
+                <a href="data" style="
+                        border-width:0;
+                        text-decoration:none;
+                        font-size:14pt;
+                        padding-bottom:14px;
+                        padding-top:14px;
+                        padding-left:18px;
+                        padding-right:18px;
+                        color:black;
+                        background-color:#fefeff;
+                        "    
+                    onmouseover="
+                        this.style.background='linear-gradient(transparent 98%, #88af88 2%)'
+                        this.style.color='#88af88'
+                        "
+                     onmouseout="
+                        this.style.background='#fefeff'
+                        this.style.color='black'
+                        " 
+                    >Data</a>
+            </div >
+            <div style="text-align:left;float:left;padding-top:14px; padding-bottom:14px;">
+                <a href="/" style="
+                        border-width:0;
+                        text-decoration:none;
+                        font-size:14pt;
+                        padding-bottom:14px;
+                        padding-top:14px;
+                        padding-left:18px;
+                        padding-right:18px;
+                        color:black;
+                        background-color:#fefeff;
+                        "    
+                    onmouseover="
+                        this.style.background='linear-gradient(transparent 98%, #88af88 2%)'
+                        this.style.color='#88af88'
+                        "
+                     onmouseout="
+                        this.style.background='#fefeff'
+                        this.style.color='black'
+                        " 
+                    >Leaderboard</a>
+            </div >
+            <div style="text-align:right; padding-top:14px; padding-bottom:14px;">
+                <a href="mysubmission" style="
+                    border-width:0;
+                    font-size:14pt;
+                    text-decoration:none;
+                    padding-bottom:14px;
+                    padding-top:14px;
+                    padding-left:18px;
+                    padding-right:18px;
+                    color:black;
+                    background-color:#fefeff;
+                    "    
+                onmouseover="
+                    this.style.background='linear-gradient(transparent 98%, #88af88 2%)'
+                    this.style.color='#88af88'
+                    "
+                 onmouseout="
+                    this.style.background='#fefeff'
+                    this.style.color='black'
+                    " 
+                >My Submissions</a>
+                <a href="submit" style="
+                        border-width:0;
+                        font-size:14pt;
+                        font-weight:bold;
+                        padding-bottom:14px;
+                        padding-top:14px;
+                        padding-left:18px;
+                        padding-right:18px;
+                        color:#fefefe;
+                        background-color:#88ce88;" 
+                     onmouseover="
+                        this.style.background='#88af88'
+                        "  
+                     onmouseout="
+                        this.style.background='#88ce88'
+                        " 
+                    >Submit Predictions</a>
+            </div>
+        </div>
+
+
+    {% block body %}{% endblock %}
+
+    <div class="footer">
+    BrainPad
+    </div>
+
+    </body>
+</html>

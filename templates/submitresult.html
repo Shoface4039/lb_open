@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="main" id="subresult">
+    <div class="result_success" style="width: 100%; margin: 0 auto;">
+    サブミット成功<br>
+    クリックされたのは{{score}}回でした。
+    </div>
+</div>
+<div class="main" id="table">
+<table>
+  <tr>
+      <th>Submit Title</th>
+      <th>Name</th>
+      <th>total click</th>
+      <th>AUC</th>
+      <th>logloss</th>
+      <th>Accuracy</th>
+      <th>diff</th>
+      <th>Entry</th>
+      <th>Last</th>
+  </tr>
+  {% for score in tables.iterrows() %}
+  <tr>
+      <td>{{score[1].title}}</td>
+      <td>{{score[1].user_id}}</td>
+      <td style="background-color: #FFE0C4;">{{score[1].total_click}}</td>
+      <td>{{score[1].auc}}</td>
+      <td>{{score[1].logloss}}</td>
+      <td>{{score[1].accuracy}}</td>
+      <td>{{score[1]["diff"]}}</td>
+      <td>{{score[1].entry}}</td>
+      <td>{{score[1].upload_date}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div>
+
+{% endblock %}

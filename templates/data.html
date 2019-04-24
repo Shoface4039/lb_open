@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="main" >
+    <div class="textarea">
+    <h2>Data Description</h2>
+    <hr>
+    {% from macro_src import data_info %}
+    {{ data_info() }}
+    </div>
+</div>
+
+{% endblock %}
