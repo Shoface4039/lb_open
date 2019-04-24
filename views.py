@@ -29,6 +29,7 @@ def top_page():
     s = "".join(["<a href={0}/overview>competiton: {0}</a><br>".format(i) for i in os.listdir("./competitions")])
     return s
 
+@app.route("/<compe>/")
 @app.route("/<compe>/overview")
 def overview_page(compe):
     return render_template("overview.html", macro_src="./" + compe + "/macro.html")
