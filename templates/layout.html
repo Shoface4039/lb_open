@@ -2,7 +2,7 @@
 <!-- -->
 <html>
     <head>
-    <link rel="stylesheet" href="static/style.css?q55">
+    <link rel="stylesheet" href= {{ url_for('static', filename="style.css") }} >
     <title>Exercise Leaderboard beta</title>
     </head>
     <body>
@@ -61,7 +61,7 @@
                     >Data</a>
             </div >
             <div style="text-align:left;float:left;padding-top:14px; padding-bottom:14px;">
-                <a href="/" style="
+                <a href="leaderboard" style="
                         border-width:0;
                         text-decoration:none;
                         font-size:14pt;

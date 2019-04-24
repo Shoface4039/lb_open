@@ -4,7 +4,7 @@ from sqlalchemy import desc
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-import io
+import io, os
 from datetime import datetime
 import pickle
 import numpy as np
@@ -16,8 +16,6 @@ from jinja2 import FileSystemLoader
 from competitions.news_click_prediction.ScoreCalculator import ScoreCalculator
 from competitions.news_click_prediction.models import ScoreStore, SubmitStore
 
-# 今後コンペも動的に選択できるようにしたい（動的ルーティングとかできるはず）
-DEFAULT_COMPETITION = "news_click_prediction"
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -26,30 +24,37 @@ app.jinja_loader = FileSystemLoader(["./templates", "./competitions"])
 
 @app.route("/")
 def top_page():
-    db = load_db()
-    return render_template("leaderboard.html", tables=db)
+    #db = load_db()
+    #return render_template("leaderboard.html", tables=db)
+    s = "".join(["<a href={0}/overview>competiton: {0}</a><br>".format(i) for i in os.listdir("./competitions")])
+    return s
 
-@app.route("/overview")
-def overview_page():
-    return render_template("overview.html", macro_src="./" + DEFAULT_COMPETITION + "/macro.html")
+@app.route("/<compe>/overview")
+def overview_page(compe):
+    return render_template("overview.html", macro_src="./" + compe + "/macro.html")
 
-@app.route("/data")
-def data_page():
-    return render_template("data.html", macro_src="./" + DEFAULT_COMPETITION + "/macro.html")
+@app.route("/<compe>/data")
+def data_page(compe):
+    return render_template("data.html", macro_src="./" + compe + "/macro.html")
 
-@app.route("/submit")
-def submit_page():
-    return render_template("submit.html")
+@app.route("/<compe>/leaderboard")
+def leaderboard_page(compe):
+    db = load_db(compe)
+    return render_template("leaderboard.html", tables=db, compe=compe)
+
+@app.route("/<compe>/submit")
+def submit_page(compe):
+    return render_template("submit.html", compe=compe)
 
 
-@app.route("/mysubmission")
-def mysub_page():
-    db = load_db()
-    return render_template("mysubmission.html", tables=db)
+@app.route("/<compe>/mysubmission")
+def mysub_page(compe):
+    db = load_db(compe)
+    return render_template("mysubmission.html", tables=db, compe=compe)
 
 
-@app.route("/submitresult", methods=['POST'])
-def submitresult():
+@app.route("/<compe>/submitresult", methods=['POST'])
+def submitresult(compe):
     submit_title = request.form["submit_name"]
     user_name = request.form["user_name"]
     filestream = request.files["upload_file"]
@@ -57,12 +62,12 @@ def submitresult():
         file_content = decode_file(filestream)
         df_submit = convert_dataframe(file_content)
         # calculate score
-        scores = get_scores(df_submit)
+        scores = get_scores(df_submit, compe)
     except (ValueError, UnicodeDecodeError):
-        return "submited file failed to convert data frame. please check. <a href='/submit'>back</a>"
+        return "submited file failed to convert data frame. please check. <a href='/"+compe+"/submit'>back</a>"
 
     # ばかすかセッション作ってるの絶対良くないと思う
-    engine = create_engine("sqlite:///competitions/" + DEFAULT_COMPETITION + "/submission.db", echo=False)
+    engine = create_engine("sqlite:///competitions/" + compe + "/submission.db", echo=False)
     session = sessionmaker(bind=engine)()
     # add file contents and upload infomation into database
     add_submitdb(user_id=user_name, submit_title=submit_title, # 後々ユーザー名とIDを対応させる処理を入れないといけない
@@ -71,13 +76,13 @@ def submitresult():
     #print(scores)
     add_scoredb(title=submit_title, user_id=user_name, session=session, **scores)
 
-    db = load_db()
-    return render_template("submitresult.html", tables=db, score=scores["total_click"])
+    db = load_db(compe)
+    return render_template("submitresult.html", tables=db, score=scores["total_click"], compe=compe)
 
 
-@app.route("/data_download", methods=['GET'])
-def data_download():
-    return send_file("competitions/" + DEFAULT_COMPETITION + "/data.zip", as_attachment=True, attachment_filename="data.zip", mimetype="application/zip") 
+@app.route("/<compe>/data_download", methods=['GET'])
+def data_download(compe):
+    return send_file("./competitions/" + compe + "/data.zip", as_attachment=True, attachment_filename="data.zip", mimetype="application/zip") 
 
 # 処理関数たち
 
@@ -95,9 +100,9 @@ def convert_dataframe(file_content):
         raise ValueError("Input size may be wrong. please check your file.")
     return df_submit
 
-def get_scores(df_submit):
+def get_scores(df_submit, compe):
     # テキストからスコアを計算する
-    sc = ScoreCalculator("./competitions/" + DEFAULT_COMPETITION + "/true_answer_v2.pkl")
+    sc = ScoreCalculator("./competitions/" + compe + "/true_answer_v2.pkl")
     scores = sc.calc_score(df_submit)
     return scores
 
@@ -121,9 +126,9 @@ def add_scoredb(title, user_id, session, total_click, auc, logloss, accuracy, pr
     session.add(c)
     session.commit()
 
-def load_db():
+def load_db(compe):
     #return ScoreStore.query.order_by(desc(ScoreStore.total_click))
-    engine = create_engine('sqlite:///competitions/' + DEFAULT_COMPETITION + '/submission.db', echo=False)
+    engine = create_engine('sqlite:///competitions/' + compe + '/submission.db', echo=False)
 
     session = sessionmaker(bind=engine)()
 
