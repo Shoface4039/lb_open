@@ -1,37 +1,13 @@
 {% extends "layout.html" %}
+{% from macro_src import ranking %}
 {% block body %}
 
 <div class="main" id="table">
 <div class="textarea">
-<h2>Leaderboard</h2>
-<hr>
+    <h2>Leaderboard</h2>
+    <hr>
 </div>
-<table>
-  <tr>
-      <th>Submit Title</th>
-      <th>Name</th>
-      <th>total click</th>
-      <th>AUC</th>
-      <th>logloss</th>
-      <th>Accuracy</th>
-      <th>diff</th>
-      <th>Entry</th>
-      <th>Last</th>
-  </tr>
-  {% for score in tables.iterrows() %}
-  <tr>
-      <td>{{score[1].title}}</td>
-      <td>{{score[1].user_id}}</td>
-      <td style="background-color: #FFE0C4;">{{score[1].total_click}}</td>
-      <td>{{score[1].auc}}</td>
-      <td>{{score[1].logloss}}</td>
-      <td>{{score[1].accuracy}}</td>
-      <td>{{score[1]["diff"]}}</td>
-      <td>{{score[1].entry}}</td>
-      <td>{{score[1].upload_date}}</td>
-  </tr>
-  {% endfor %}
-</table>
+    {{ ranking(tables) }}
 </div>
 
 {% endblock %}

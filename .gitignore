@@ -5,9 +5,9 @@ __pycache__/
 
 
 # 個別のコンペに関する情報はいれない
-competitions/*
+competitions/
 # ただしチュートリアルは含める
-!competitions/tutorial_houseprice/
+!/competitions/tutorial_houseprice/
 
 
 !.gitkeep

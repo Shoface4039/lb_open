@@ -1,0 +1,53 @@
+{% macro description() %}
+    <div id="overviewtext" style="padding-left:40px;">
+    <h3>チュートリアル　概要</h3>
+    <p>
+    hogehoge
+    </p>
+
+    <h3>問題設定</h3>
+    <p>
+    </p>
+    hogehoge
+    </div>
+{% endmacro %}
+
+{% macro data_info() %}
+    <div id="overviewtext" style="padding-left:40px;">
+    <h3>データの入手方法</h3>
+    <!--
+    データを新しく取得する場合は、以下のボタンからzipファイルをダウンロードし、解凍してください。
+    <br>
+    <form action="data_download" method="get">
+        <button class="send">Download zip</button>
+    </form>
+    <br>
+    もしくは、SQL研修で用いたDB（pj020228）にもあります。
+-->
+    <h3>データの内容</h3>
+    <p>
+    提供するデータは下記の4ファイルです。
+    <li>UserMaster.tsv: ユーザーに関する情報。
+    <li>ClickLog.tsv: 配信履歴。
+    <li>DeliveryLog.tsv: クリックされ配信ID。
+    <li>Answer.tsv: 提出用ファイル
+    </p>
+
+{% endmacro %}
+
+{% macro ranking(tables) %}
+<table>
+  <tr>
+      <th>Submit Title</th>
+      <th>Name</th>
+      <th>RMSLE</th>
+  </tr>
+  {% for score in tables.iterrows() %}
+  <tr>
+      <td>{{score[1].title}}</td>
+      <td>{{score[1].user_id}}</td>
+      <td style="background-color: #FFE0C4;">{{score[1].RMSLE}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endmacro %}
