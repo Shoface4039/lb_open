@@ -48,7 +48,7 @@ class ScoreCalculator():
 
     # 評価指標の定義
     def _calc_rmsle(self, actual, predicted):
-        msle = ((np.log(t+1) - np.log(p+1))**2).sum()/len(t)
+        msle = ((np.log(actual+1) - np.log(predicted+1))**2).sum()/len(actual)
         rmsle = msle ** 1/2
         return rmsle
     
@@ -65,9 +65,9 @@ class ScoreCalculator():
         actual = df_merged["TruePrice"].values
         predict = df_merged["SalePrice"].values
 
-        rmlse = self._calc_rmsle(actual, predict)
+        rmsle = self._calc_rmsle(actual, predict)
         
-        scores = {"RMLSE": round(rmlse, 4)}
+        scores = {"RMSLE": round(rmsle, 4)}
  
         return scores   
     

@@ -44,8 +44,7 @@ def leaderboard_page(compe):
     ScoreCalculator = importlib.import_module("competitions." + compe + ".ScoreCalculator")
     sc = ScoreCalculator.ScoreCalculator("./competitions/" + compe + "/true_answer.pkl")
     db = load_db(compe, sc.main_score, sc.disp_score, sc.ascending)
-    return render_template("leaderboard.html", tables=db, compe=compe,
-                           macro_src="./" + compe + "/macro.html")
+    return render_template("leaderboard.html", tables=db, compe=compe)
 
 @app.route("/<compe>/submit")
 def submit_page(compe):
@@ -88,7 +87,7 @@ def submitresult(compe):
     add_scoredb(title=submit_title, user_id=user_name, session=session, compe=compe,  **scores)
 
     db = load_db(compe, sc.main_score, sc.disp_score, sc.ascending)
-    return render_template("submitresult.html", tables=db, score=scores[sc.main_score], compe=compe,
+    return render_template("submitresult.html", tables=db, main_score=scores[sc.main_score], compe=compe,
                            macro_src="./" + compe + "/macro.html")
 
 

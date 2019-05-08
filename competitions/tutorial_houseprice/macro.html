@@ -35,19 +35,6 @@
 
 {% endmacro %}
 
-{% macro ranking(tables) %}
-<table>
-  <tr>
-      <th>Submit Title</th>
-      <th>Name</th>
-      <th>RMSLE</th>
-  </tr>
-  {% for score in tables.iterrows() %}
-  <tr>
-      <td>{{score[1].title}}</td>
-      <td>{{score[1].user_id}}</td>
-      <td style="background-color: #FFE0C4;">{{score[1].RMSLE}}</td>
-  </tr>
-  {% endfor %}
-</table>
+{% macro resultview(main_score) %}
+予測結果のRMSEは、 {{main_score}}　でした。
 {% endmacro %}
