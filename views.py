@@ -173,7 +173,7 @@ def load_db(compe, sort_column, display_column, sort_ascending):
     tbl_merged = tbl_merged[["title", "user_id", sort_column] + display_column + ["entry", "upload_date"]]
 
     # leave top score each user
-    tbl_merged = tbl_merged.groupby("user_id").max()
+    tbl_merged = tbl_merged.groupby("user_id").max().reset_index()
 
     return tbl_merged.sort_values(sort_column, ascending=sort_ascending)
 
