@@ -170,10 +170,12 @@ def load_db(compe, sort_column, display_column, sort_ascending):
     # generate entry count
     s = tbl_merged.groupby("user_id").agg({"id":"count"}).reset_index()
     tbl_merged = pd.merge(tbl_merged, s.rename({"id": "entry"}, axis=1), on="user_id", how="left")
-    tbl_merged = tbl_merged[["title", "user_id", sort_column] + display_column + ["entry", "upload_date"]]
 
     # leave top score each user
     tbl_merged = tbl_merged.groupby("user_id").max().reset_index()
+
+    # align columns order
+    tbl_merged = tbl_merged[["title", "user_id", sort_column] + display_column + ["entry", "upload_date"]]
 
     return tbl_merged.sort_values(sort_column, ascending=sort_ascending)
 
