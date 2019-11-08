@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% from macro_src import resultview %}
+{% block body %}
+
+<div class="main" id="subresult">
+    <div class="result_success" style="width: 100%; margin: 0 auto;">
+    サブミット成功<br>
+    {{ resultview(main_score) }}
+    </div>
+</div>
+
+<div class="main" id="table">
+<div class="textarea">
+    <h2>Leaderboard</h2>
+    <hr>
+</div>
+    <table>
+      <tr>
+          {% for ind in tables.columns %}
+            <th>{{ind}}</th>
+          {% endfor %}
+      </tr>
+      {% for score in tables.iterrows() %}
+      <tr>
+          <td>{{score[1].title}}</td>
+          <td>{{score[1].user_id}}</td>
+          <td style="background-color: #FFE0C4;">{{score[1][2]}}</td>
+          {% for s in score[1][3:] %}
+              <td>{{s}}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+div.header {
+	margin-top:-10px;
+	margin-left:-10px;
+	margin-right:-10px; 
+	padding:20px; 
+	background-color:#457ba0;
+    color:white;
+	}
+
+body {
+	font-family:sans-serif;
+	color:#3b3b60; 
+	background-color:#F8FaFb;
+	}
+
+#compe_info {
+	background-color:#303055;
+	color:#fefeff;
+    margin-bottom:-15px;
+	}
+
+#compe_info h1 {
+	text-align: left;
+	color:#fefeff;
+    padding-top:20px;
+    padding-bottom:80px;
+	}
+
+#compe_description {
+	text-align:right;
+	}
+
+#compe_bar {
+	background-color:#fefefe;
+	font-size:15pt;
+    margin-top:-15px;
+    margin-bottom:30px;
+	}
+
+div.main {
+	/*text-align:center;*/
+	margin:auto;
+	width:950px;
+	}
+
+#subresult {
+    background-color:white;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+div.textarea {
+    text-align:left;
+    background-color:white;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+/*
+.reset_style {
+	table {
+    border-collapse: initial;
+    border-spacing: initial;
+    border-width: initial;
+    border-color: initial;
+  }
+  tr {
+	color:initial; background-color:initial;
+	padding-top:initial; padding-bottom:initial;
+    border-bottom: initial;
+  }
+  td {
+	padding-top:initial; padding-bottom:initial; border-style:initial;
+	border-width:initial; border-color:initial; background-color:initial;
+    vertical-align: initial;
+    padding: initial;
+  }
+	}
+*/
+table {
+	text-align: right; margin-left:auto;
+	margin-right:auto; width:100%;
+	border-collapse: collapse; /*border-spacing:60px 32px;*/
+	table-layout:fixed; word-wrap:break-all;
+	}
+
+th {
+	eolor:#76768a; background-color:white;
+	padding-top:30px; padding-bottom:8px;
+	}
+
+td { 
+	padding-top:8px; padding-bottom:8px; border-style:solid none;
+	border-width:0.8px; border-color:#76768a; background-color:#eaf2fa;
+	}
+
+div.footer { 
+	position:fixed; bottom:0; width:95%;
+	     text-align:right; margin:auto;
+     }
+
+
+/* submit form style */
+form#my_form {
+
+}
+
+ul li {
+    list-style: none;
+    margin-top: 10px;
+}
+label {
+    margin-right: 10px;
+    width: 100px;
+    float: left;
+}
+
+ul {
+    border-radius: 10px;
+    border: dashed 2px gray;
+    background-color: #eaeaf0;
+    width: 500px;
+    margin: 0 auto;
+}
+
+button#button {
+    display: block;
+    margin: 0 auto;
+}
+
+button.send {
+    width: 160px;
+    height: 40px;
+    background-color: #88ce88;
+    border-radius: 10px;
+    font-size: 16pt;
+}
+
+div.DataArea {
+    margin:0px 100px 0px 50px; 
+    background-color:#e3e3e3;
+    border-radius:10px;
+}
